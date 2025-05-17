@@ -1,6 +1,13 @@
 import React from 'react'
 import { Send } from 'lucide-react'
-const SummarySectionForm = () => {
+const SummarySectionForm = ({ setSummaryData }) => {
+    const handleChange = (e) => {
+        setSummaryData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     return (
         <div className='glass-card p-5 mt-6 animate-fade-in'>
             <div className="flex items-center mb-4 ">
@@ -11,7 +18,7 @@ const SummarySectionForm = () => {
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-mono" htmlFor="taxRate">Tax Rate (%)</label>
-                        <input type="number" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="taxRate" min="0" max="100" step="0.01" value="0" />
+                        <input onChange={handleChange} type="number" name='taxRate' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="taxRate" min="0" max="100" step="0.01" />
                     </div>
                     <div className="space-y-2">
                         <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-mono">Discount</label>
@@ -20,12 +27,12 @@ const SummarySectionForm = () => {
                                 <option value="percentage">%</option>
                                 <option value="fixed">$</option>
                             </select>
-                            <input type="number" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm col-span-2 border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" min="0" step="0.01" value="0"></input>
+                            <input onChange={handleChange} type="number" name='discount' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm col-span-2 border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" min="0" step="0.01" />
                         </div>
                     </div>
                     <div className="space-y-2">
                         <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-mono" HTMLfor="notes">Notes</label>
-                        <textarea id="notes" placeholder="Add invoice notes here..." class="w-full border border-white/10 rounded-md bg-white/5 px-3 py-2 h-32 resize-none focus:outline-none focus:border-neon-blue transition-all focus:ring-1 focus:ring-neon-blue/20"></textarea>
+                        <textarea onChange={handleChange} id="notes" name='notes' placeholder="Add invoice notes here..." class="w-full border border-white/10 rounded-md bg-white/5 px-3 py-2 h-32 resize-none focus:outline-none focus:border-neon-blue transition-all focus:ring-1 focus:ring-neon-blue/20"></textarea>
                     </div>
                 </div>
                 <div className="bg-white/5 rounded-lg p-4">

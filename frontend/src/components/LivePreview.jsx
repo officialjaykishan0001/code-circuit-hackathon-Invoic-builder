@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LivePreview = () => {
+const LivePreview = ({ clientData, itemsData, summaryData}) => {
     return (
         <div className='w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 hidden lg:block overflow-hidden'>
             <div className="glass-card h-full p-5 overflow-auto animate-slide-in">
@@ -13,7 +13,7 @@ const LivePreview = () => {
                         <div className='flex justify-between'>
                             <div>
                                 <h1 className="text-2xl font-bold text-gray-800">INVOICE</h1>
-                                <p className="text-gray-600 mt-1">#INV-63462</p>
+                                <p className="text-gray-600 mt-1">#{clientData.invoiceNumber}</p>
                             </div>
                             <div className="text-right">
                                 <p className="font-bold text-gray-800">Your Company Name</p>
@@ -27,18 +27,18 @@ const LivePreview = () => {
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
                                 <h2 className='text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2'>Bill To:</h2>
-                                <h3 className="text-base font-bold">Client Name</h3>
-                                <p className="text-gray-600">client@example.com</p>
-                                <p className="text-gray-600 whitespace-pre-line">Client Address</p>
+                                <h3 className="text-base font-bold">{clientData.name}</h3>
+                                <p className="text-gray-600">{clientData.email}</p>
+                                <p className="text-gray-600 whitespace-pre-line">{clientData.address}</p>
                             </div>
                             <div className="md:text-right">
                                 <div className="mb-2">
                                     <span classNme="text-sm font-semibold text-gray-600 uppercase tracking-wider">Issue Date:</span>
-                                    <span className="text-gray-800 ml-2">2025-05-17</span>
+                                    <span className="text-gray-800 ml-2">{clientData.issueDate}</span>
                                 </div>
                                 <div>
                                     <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Due Date:</span>
-                                    <span classname="text-gray-800 ml-2">2025-06-16</span>
+                                    <span classname="text-gray-800 ml-2">{clientData.dueDate}</span>
                                 </div>
                             </div>
                         </div>
@@ -54,10 +54,10 @@ const LivePreview = () => {
                                 </thead>
                                 <tbody>
                                     <tr className='bg-white'>
-                                        <td classname="py-3 px-4">Item description</td>
-                                        <td className="py-3 px-4 text-right">1</td>
-                                        <td className="py-3 px-4 text-right">$0.00</td>
-                                        <td className="py-3 px-4 text-right">$0.00</td>
+                                        <td classname="py-3 px-4">{itemsData.description}</td>
+                                        <td className="py-3 px-4 text-right">{itemsData.quantity}</td>
+                                        <td className="py-3 px-4 text-right">${itemsData.price}</td>
+                                        <td className="py-3 px-4 text-right">${itemsData.quantity + itemsData.price}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -71,12 +71,12 @@ const LivePreview = () => {
                                     </span>
                                 </div>
                                 <div className="flex justify-between py-1">
-                                    <span className="text-gray-600">Tax (0%):</span>
-                                    <span className="font-medium">$0.00</span>
+                                    <span className="text-gray-600">Tax ({summaryData.taxRate}%):</span>
+                                    <span className="font-medium">${summaryData.taxRate}</span>
                                 </div>
                                 <div className="flex justify-between py-1">
                                     <span className="text-gray-600">Discount:</span>
-                                    <span className="font-medium">-$0.00</span>
+                                    <span className="font-medium">-${summaryData.discount}</span>
                                 </div>
                                 <div className="flex justify-between border-t border-gray-200 pt-2 mt-1">
                                     <span className="text-lg font-bold text-gray-800">Total:</span>

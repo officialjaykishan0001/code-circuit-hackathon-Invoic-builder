@@ -1,7 +1,14 @@
 import React from 'react'
 import { Plus, Trash2 } from 'lucide-react'
 
-const ItemsSectionForm = () => {
+const ItemsSectionForm = ({ setItemsData }) => {
+    const handleChange = (e) => {
+        setItemsData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     return (
         <div className='glass-card p-5 mt-6 animate-fade-in'>
             <div className="flex items-center justify-between mb-4">
@@ -25,13 +32,13 @@ const ItemsSectionForm = () => {
                     <tbody>
                         <tr className='border-b border-white/5 bg-white/[0.02]'>
                             <td className="py-3">
-                                <input class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-0 bg-transparent focus:border-neon-blue focus:ring-0" placeholder="Item description" value="" />
+                                <input onChange={handleChange}  type="text" name='description' class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2   md:text-sm border-0 bg-transparent focus:border-neon-blue focus:ring-0" placeholder="Item description" />
                             </td>
                             <td>
-                                <input type="number" class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-0 bg-transparent text-right focus:ring-0" min="1" value="1" />
+                                <input onChange={handleChange} type="number" name='quantity' class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-0 bg-transparent text-right focus:ring-0" min="1"  placeholder='0' />
                             </td>
                             <td>
-                                <input type="number" class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-0 bg-transparent text-right focus:ring-0" min="0" step="0.01" value="0" />
+                                <input onChange={handleChange} type="number" name='price' class="flex h-10 w-full rounded-md border-input px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-0 bg-transparent text-right focus:ring-0" min="0" step="0.01" placeholder='0' />
                             </td>
                             <td className='text-right font-mono'>
                                 $0.01
