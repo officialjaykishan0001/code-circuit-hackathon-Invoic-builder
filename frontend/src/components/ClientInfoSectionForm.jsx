@@ -1,11 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateClientData } from '../redux/dataSlice';
 
 const ClientInfoSectionForm = () => {
 
     const dispatch = useDispatch();
-    const clientData = useSelector((state) => state.data.clientData);
 
     const handleChange = (e) => {
         dispatch(updateClientData({ [e.target.name]: e.target.value }));
@@ -37,11 +36,11 @@ const ClientInfoSectionForm = () => {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-mono" htmlFor="issueDate">Issue Date</label>
-                        <input onChange={handleChange} type="date" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="issueDate" name="issueDate" value="2025-05-17" />
+                        <input onChange={handleChange} type="date" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="issueDate" name="issueDate"  />
                     </div>
                     <div className="space-y-2">
                         <label class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-mono" htmlFor="dueDate">Due Date</label>
-                        <input onChange={handleChange} type="date" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="dueDate" name="dueDate" value="2025-06-06" />
+                        <input onChange={handleChange} type="date" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm border-white/10 bg-white/5 focus:border-neon-blue transition-all focus:neon-glow" id="dueDate" name="dueDate"  />
                     </div>
                 </div>
             </div>

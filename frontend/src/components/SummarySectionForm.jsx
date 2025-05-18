@@ -9,7 +9,6 @@ const SummarySectionForm = () => {
     const summaryData = useSelector((state) => state.data.summaryData);
     const subtotal = useSelector((state) => state.data.subtotal)
     const download = useSelector((state) => state.data.download)
-
     const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
 
     const handleChange = (e) => {
