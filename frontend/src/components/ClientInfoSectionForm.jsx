@@ -1,12 +1,14 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateClientData } from '../redux/dataSlice';
 
-const ClientInfoSectionForm = ({ setClientData }) => {
-    
+const ClientInfoSectionForm = () => {
+
+    const dispatch = useDispatch();
+    const clientData = useSelector((state) => state.data.clientData);
+
     const handleChange = (e) => {
-        setClientData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
+        dispatch(updateClientData({ [e.target.name]: e.target.value }));
     };
 
     return (

@@ -2,26 +2,8 @@ import { useState } from 'react';
 import CreateInvoice from './components/CreateInvoice';
 import LivePreview from './components/LivePreview';
 import Sidebar from './components/Sidebar'
-
+import { useSelector } from 'react-redux'
 function App() {
-  const [clientData, setClientData] = useState({
-    name: "Client Name",
-    email: "client@example.com",
-    address: "Client Address",
-    issueDate: "05/17/2025",
-    dueDate: "06/06/2025",
-    invoiceNumber: "INV - 49554"
-
-  });
-  const [itemsData, setItemsData] = useState({
-    description: "Item Description",
-    quantity: "1",
-    price: "0.00"
-  });
-  const [summaryData, setSummaryData] = useState({
-    taxRate: "0.00",
-    discount: "0.00"
-  });
 
 
   return (
@@ -30,16 +12,8 @@ function App() {
       <Sidebar />
       <div className='flex-1'>
         <div className="flex min-h-screen max-h-screen bg-[#10131b] text-white">
-          <CreateInvoice
-            setClientData={setClientData}
-            setItemsData={setItemsData}
-            setSummaryData={setSummaryData}
-          />
-          <LivePreview
-            clientData={clientData}
-            itemsData={itemsData}
-            summaryData={summaryData}
-          />
+          <CreateInvoice />
+          <LivePreview />
         </div>
       </div>
     </div>

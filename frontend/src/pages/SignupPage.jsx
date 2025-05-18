@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/Card";
 import { EyeOff, Eye, Mail, Lock, UserPlus} from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const SignupPage = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
+    const handleSignup = () => {
+        toast.success("Account created successfully")
+        navigate('/login')
+    }
     return (
         <div>
             <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
@@ -78,7 +83,7 @@ const SignupPage = () => {
                                         <a href="#" class="text-neon-blue hover:text-neon-blue/80 transition-colors">Privacy Policy</a>
                                     </label>
                                 </div>
-                                <button onClick={() => navigate('/login')} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-5 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
+                                <button onClick={handleSignup} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-5 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
                                     <UserPlus /> Create Account
                                 </button>
                                 <div class="flex items-center justify-center text-sm">

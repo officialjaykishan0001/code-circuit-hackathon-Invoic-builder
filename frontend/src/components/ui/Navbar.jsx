@@ -8,14 +8,10 @@ const Navbar = () => {
                 <span className="inline-block text-xl font-mono font-bold text-white">
                     InvoiceX
                 </span>
-
-
-
             </div>
             <div className="flex items-center gap-4">
                 <Link to="/login">
                     <button
-                        variant="ghost"
                         className="text-sm text-white/70 hover:text-white transition-colors"
                     >
                         Login

@@ -7,6 +7,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
+import { Toaster } from "react-hot-toast";
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const appRouter = createBrowserRouter([
   {
@@ -23,13 +26,16 @@ const appRouter = createBrowserRouter([
   },
   {
     path: 'signup',
-    element: <SignupPage/>
+    element: <SignupPage />
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={appRouter} />
+    <Provider store={store}>
+      <RouterProvider router={appRouter} />
+      <Toaster />
+    </Provider>
   </React.StrictMode>
 );
 

@@ -7,13 +7,13 @@ const Sidebar = () => {
   return (
     <div className='h-screen w-20 lg:w-64 flex flex-col glass-dark background'>
       <div className="p-4 flex items-center justify-center lg:justify-start border-b border-white/10">
-        <span className='hidden lg:block text-2xl font-mono tracking-wide font-bold neon-text'>INVOICE<span class="text-neon-blue">X</span></span>
+        <span className='hidden lg:block text-2xl font-mono tracking-wide font-bold text-neon-blue'>INVOICE<span class="text-neon-blue">X</span></span>
         <span className="block lg:hidden text-2xl font-mono font-bold text-neon-blue">IX</span>
       </div>
       <nav className='flex-1 pt-8'>
         <ul className="space-y-2">
           <li>
-            <a href="#" className='flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 bg-primary text-neon-blue neon-glow'>
+            <a href="#" className='flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 text-neon-blue neon-glow'>
               <FileText />
               <span className='hidden lg:block font-medium ml-3'>Invoices</span>
             </a>

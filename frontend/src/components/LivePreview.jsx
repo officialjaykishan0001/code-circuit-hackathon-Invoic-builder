@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { updateSubtotal } from '../redux/dataSlice';
 
-const LivePreview = ({ clientData, itemsData, summaryData}) => {
+const LivePreview = () => {
+    const clientData = useSelector((state) => state.data.clientData);
+    const itemsData = useSelector((state) => state.data.itemsData);
+    const summaryData = useSelector((state) => state.data.summaryData);
+    const subtotal = useSelector((state) => state.data.subtotal)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const subtotal = itemsData.reduce((total, item) => {
+            const quantity = parseFloat(item.quantity) || 0;
+            const price = parseFloat(item.price) || 0;
+            return total + (quantity * price);
+        }, 0);
+
+        dispatch(updateSubtotal(subtotal));
+    }, [itemsData, dispatch]);  
+
+
+    const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
     return (
         <div className='w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 hidden lg:block overflow-hidden'>
             <div className="glass-card h-full p-5 overflow-auto animate-slide-in">
@@ -53,12 +73,16 @@ const LivePreview = ({ clientData, itemsData, summaryData}) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr className='bg-white'>
-                                        <td classname="py-3 px-4">{itemsData.description}</td>
-                                        <td className="py-3 px-4 text-right">{itemsData.quantity}</td>
-                                        <td className="py-3 px-4 text-right">${itemsData.price}</td>
-                                        <td className="py-3 px-4 text-right">${itemsData.quantity + itemsData.price}</td>
-                                    </tr>
+                                    {
+                                        itemsData.map((item, idx) => (
+                                            <tr className='bg-white' key={idx}>
+                                                <td classname="py-3 px-4">{item.description}</td>
+                                                <td className="py-3 px-4 text-right">{item.quantity}</td>
+                                                <td className="py-3 px-4 text-right">${item.price}</td>
+                                                <td className="py-3 px-4 text-right">${parseFloat(item.quantity) * parseFloat(item.price)}</td>
+                                            </tr>
+                                        ))
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -67,7 +91,7 @@ const LivePreview = ({ clientData, itemsData, summaryData}) => {
                                 <div className="flex justify-between py-1 ">
                                     <span className="text-gray-600">Subtotal:</span>
                                     <span className="font-medium">
-                                        $0.00
+                                        ${subtotal}
                                     </span>
                                 </div>
                                 <div className="flex justify-between py-1">
@@ -80,7 +104,7 @@ const LivePreview = ({ clientData, itemsData, summaryData}) => {
                                 </div>
                                 <div className="flex justify-between border-t border-gray-200 pt-2 mt-1">
                                     <span className="text-lg font-bold text-gray-800">Total:</span>
-                                    <span className="text-lg font-bold text-gray-800">$0.00</span>
+                                    <span className="text-lg font-bold text-gray-800">${total}</span>
                                 </div>
                             </div>
                         </div>

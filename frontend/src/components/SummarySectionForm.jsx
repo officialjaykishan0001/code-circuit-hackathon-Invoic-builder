@@ -1,13 +1,18 @@
 import React from 'react'
 import { Send } from 'lucide-react'
-const SummarySectionForm = ({ setSummaryData }) => {
+import { updateSummaryData } from '../redux/dataSlice';
+import { useDispatch, useSelector } from 'react-redux';
+const SummarySectionForm = () => {
+
+    const dispatch = useDispatch();
+    const summaryData = useSelector((state) => state.data.summaryData);
+    const subtotal = useSelector((state) => state.data.subtotal)
+
     const handleChange = (e) => {
-        setSummaryData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
+        dispatch(updateSummaryData({ [e.target.name]: e.target.value }));
     };
 
+    const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
     return (
         <div className='glass-card p-5 mt-6 animate-fade-in'>
             <div className="flex items-center mb-4 ">
@@ -39,19 +44,19 @@ const SummarySectionForm = ({ setSummaryData }) => {
                     <div className="space-y-3">
                         <div className='flex justify-between'>
                             <span className="text-white/70 font-mono">Subtotal: </span>
-                            <span className="font-mono">$0.00</span>
+                            <span className="font-mono">${subtotal}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span className="text-white/70 font-mono">Tax (0%): </span>
-                            <span className="font-mono">$0.00</span>
+                            <span className="font-mono">${summaryData.taxRate}</span>
                         </div>
                         <div className='flex justify-between'>
                             <span className="text-white/70 font-mono">Discount: </span>
-                            <span className="font-mono">-$0.00</span>
+                            <span className="font-mono">-${summaryData.discount}</span>
                         </div>
                         <div className="border-t border-white/10 pt-3 mt-3 flex justify-between items-center">
                             <span class="text-lg font-mono">Total:</span>
-                            <span class="text-2xl font-mono text-neon-blue">$0.00</span>
+                            <span class="text-2xl font-mono text-neon-blue">${total}</span>
                         </div>
                         <div className="pt-6">
                             <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-10 px-4 w-full bg-neon-blue hover:bg-neon-blue/80 text-white font-medium py-6 rounded-md transition-all animate-float">

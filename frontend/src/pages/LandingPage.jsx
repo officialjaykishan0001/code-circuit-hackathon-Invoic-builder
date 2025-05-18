@@ -12,7 +12,7 @@ const LandingPage = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 to-background z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(51,195,240,0.1),rgba(51,195,240,0)_50%)]"></div>
         <div className="absolute w-full h-full">
-          {Array.from({ length: 20 }).map((_, i) => (
+          {Array.from({ length: 100 }).map((_, i) => (
             <div
               key={i}
               className="animate-particles absolute rounded-full"

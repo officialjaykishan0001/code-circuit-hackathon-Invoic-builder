@@ -2,10 +2,16 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/Card";
 import { EyeOff, Eye, Mail, Lock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const handleLogin = () => {
+    toast.success("Logged in successfully.");
+    navigate("/dashboard")
+  }
   return (
     <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 to-background z-0">
@@ -24,7 +30,7 @@ const LoginPage = () => {
           <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-neon-blue/50 via-neon-purple/50 to-neon-cyan/50 opacity-50 blur-sm  pointer-events-none"></div>
 
           <CardHeader className="relative space-y-1 pb-0 pt-6">
-          <h2 class="text-3xl font-mono font-bold text-center b text-neon-blue to-neon-purple">Log In</h2>
+            <h2 class="text-3xl font-mono font-bold text-center b text-neon-blue to-neon-purple">Log In</h2>
             <p className="text-center text-sm text-white/70">
               Access your invoice management dashboard
             </p>
@@ -51,7 +57,7 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
-              <button onClick={() => navigate('/dashboard')} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-5 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
+              <button onClick={handleLogin} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-5 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
 
               <div className="flex items-center justify-between text-sm">
                 <a href="#" className="text-neon-blue hover:text-neon-blue/80 transition-colors">
