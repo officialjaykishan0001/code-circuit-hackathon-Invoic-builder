@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
   const navigate = useNavigate();
+
   return (
     <div className="min-h-screen overflow-hidden relative w-full">
       <div className="absolute inset-0 bg-gradient-to-br from-background/80 to-background z-0">
@@ -43,7 +44,7 @@ const LandingPage = () => {
           </p>
 
           <button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/signup')}
             className="cursor-pointer px-8 py-6 h-auto  text-lg font-semibold rounded-xl bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300 animate-hover-glow z-100"
           >
             <div className="flex">

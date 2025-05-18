@@ -24,9 +24,7 @@ const LoginPage = () => {
           <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-neon-blue/50 via-neon-purple/50 to-neon-cyan/50 opacity-50 blur-sm  pointer-events-none"></div>
 
           <CardHeader className="relative space-y-1 pb-0 pt-6">
-            <h2 className="text-3xl font-mono font-bold text-center">
-              Log In
-            </h2>
+          <h2 class="text-3xl font-mono font-bold text-center b text-neon-blue to-neon-purple">Log In</h2>
             <p className="text-center text-sm text-white/70">
               Access your invoice management dashboard
             </p>

@@ -21,7 +21,7 @@ const Navbar = () => {
                         Login
                     </button>
                 </Link>
-                <Link to="/login">
+                <Link to="/signup">
                     <button
                         className="text-sm font-medium px-4 py-2 h-auto border border-neon-blue/50 bg-neon-blue/10 hover:bg-neon-blue/20 text-white rounded-lg transition-all"
                     >
