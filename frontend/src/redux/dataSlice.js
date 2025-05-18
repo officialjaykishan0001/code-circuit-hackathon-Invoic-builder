@@ -7,8 +7,8 @@ const dataSlice = createSlice({
             name: "Client Name",
             email: "client@example.com",
             address: "Client Address",
-            issueDate: "05/17/2025",
-            dueDate: "06/06/2025",
+            issueDate: "2025-05-17",
+            dueDate: "2025-06-06",
             invoiceNumber: "INV - 49554"
         },
         itemsData: [
@@ -22,7 +22,8 @@ const dataSlice = createSlice({
             taxRate: "0.00",
             discount: "0.00"
         },
-        subtotal: 0
+        subtotal: 0,
+        download: false
     },
     reducers: {
         updateClientData: (state, action) => {
@@ -44,13 +45,16 @@ const dataSlice = createSlice({
         updateSubtotal: (state, action) => {
             state.subtotal = action.payload
         },
+        updateDownload: (state, action) => {
+            state.download = action.payload
+        },
         resetAllData: (state) => {
             state.clientData = {
                 name: "Client Name",
                 email: "client@example.com",
                 address: "Client Address",
-                issueDate: "05/17/2025",
-                dueDate: "06/06/2025",
+                issueDate: "2025-05-17",
+                dueDate: "2025-06-06",
                 invoiceNumber: "INV - 49554"
             };
             state.itemsData = [
@@ -75,7 +79,8 @@ export const {
     removeItemData,
     updateSummaryData,
     updateSubtotal,
-    resetAllData
+    resetAllData,
+    updateDownload
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -4,13 +4,13 @@ import ItemsSectionForm from './ItemsSectionForm'
 import LivePreview from './LivePreview'
 import SummarySectionForm from './SummarySectionForm'
 
-const CreateInvoice = ({ subtotal, setSubtotal, itemsData, setItemsData, setSummaryData }) => {
+const CreateInvoice = () => {
     return (
         <div className="flex-1 overflow-y-scroll p-6">
             <h1 className='text-2xl md:text3xl font-mono font-bold mb-6'>Create New Invoice</h1>
             <ClientInfoSectionForm />
-            <ItemsSectionForm itemsData={itemsData} setItemsData={setItemsData} setSubtotal={setSubtotal}/>
-            <SummarySectionForm setSummaryData={setSummaryData} subtotal={subtotal}/>
+            <ItemsSectionForm />
+            <SummarySectionForm />
         </div>
     )
 }

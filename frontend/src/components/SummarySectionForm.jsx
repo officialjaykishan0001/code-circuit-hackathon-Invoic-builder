@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Send } from 'lucide-react'
-import { updateSummaryData } from '../redux/dataSlice';
+import { updateDownload, updateSummaryData } from '../redux/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
+
 const SummarySectionForm = () => {
 
     const dispatch = useDispatch();
     const summaryData = useSelector((state) => state.data.summaryData);
     const subtotal = useSelector((state) => state.data.subtotal)
+    const download = useSelector((state) => state.data.download)
+    const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
 
     const handleChange = (e) => {
         dispatch(updateSummaryData({ [e.target.name]: e.target.value }));
     };
 
-    const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
     return (
         <div className='glass-card p-5 mt-6 animate-fade-in'>
             <div className="flex items-center mb-4 ">
@@ -59,12 +62,13 @@ const SummarySectionForm = () => {
                             <span class="text-2xl font-mono text-neon-blue">${total}</span>
                         </div>
                         <div className="pt-6">
-                            <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-10 px-4 w-full bg-neon-blue hover:bg-neon-blue/80 text-white font-medium py-6 rounded-md transition-all animate-float">
+                            <button onClick={() => dispatch(updateDownload(!download))} class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-10 px-4 w-full bg-neon-blue hover:bg-neon-blue/80 text-white font-medium py-6 rounded-md transition-all animate-float">
                                 <Send />
-                                Send Invoice</button>
+                                Export PDF
+                            </button>
                             <div class="grid grid-cols-2 gap-3 mt-3">
                                 <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border hover:text-accent-foreground h-10 px-4 py-2 border-white/20 bg-white/5 hover:bg-white/10">Save Draft</button>
-                                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border hover:text-accent-foreground h-10 px-4 py-2 border-white/20 bg-white/5 hover:bg-white/10">Export PDF</button>
+                                <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border hover:text-accent-foreground h-10 px-4 py-2 border-white/20 bg-white/5 hover:bg-white/10">Send Invoice</button>
                             </div>
                         </div>
                     </div>

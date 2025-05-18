@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSubtotal } from '../redux/dataSlice';
+import { resetAllData, updateDownload, updateSubtotal } from '../redux/dataSlice';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import toast from 'react-hot-toast'
 
 const LivePreview = () => {
     const clientData = useSelector((state) => state.data.clientData);
     const itemsData = useSelector((state) => state.data.itemsData);
     const summaryData = useSelector((state) => state.data.summaryData);
     const subtotal = useSelector((state) => state.data.subtotal)
+    const download = useSelector((state) => state.data.download);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,10 +21,37 @@ const LivePreview = () => {
         }, 0);
 
         dispatch(updateSubtotal(subtotal));
-    }, [itemsData, dispatch]);  
+    }, [itemsData, dispatch]);
 
 
     const total = (subtotal - summaryData.discount) + ((subtotal - summaryData.discount) * summaryData.taxRate / 100)
+
+    const invoiceRef = useRef();
+    if (download) {
+        const input = invoiceRef.current;
+
+        html2canvas(input, { scale: 2 })
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const imgProps = pdf.getImageProperties(imgData);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save('invoice.pdf');
+                
+                toast.success('Invoice downloaded successfully.')
+                dispatch(resetAllData());
+            })
+            .catch((err) => {
+                console.error('Failed to generate PDF:', err);
+                toast.error('Error downloading invoice.')
+            });
+        dispatch(updateDownload(!download))
+    }
+
     return (
         <div className='w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 hidden lg:block overflow-hidden'>
             <div className="glass-card h-full p-5 overflow-auto animate-slide-in">
@@ -28,7 +59,7 @@ const LivePreview = () => {
                     <div className="h-5 w-1 bg-neon-blue rounded-full mr-2"></div>
                     <h2 className="text-xl font-mono font-semibold">Live Preview</h2>
                 </div>
-                <div className="bg-white text-black rounded-lg shadow-xl overflow-hidden">
+                <div ref={invoiceRef} className="bg-white text-black rounded-lg shadow-xl overflow-hidden">
                     <div className='border-b-2 border-gray-200 bg-gray-100 p-6'>
                         <div className='flex justify-between'>
                             <div>
