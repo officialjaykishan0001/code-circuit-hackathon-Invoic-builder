@@ -42,7 +42,7 @@ const LivePreview = () => {
                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save('invoice.pdf');
                 
-                toast.success('Invoice downloaded successfully.')
+                toast.success('Invoice exported successfully.')
                 dispatch(resetAllData());
             })
             .catch((err) => {

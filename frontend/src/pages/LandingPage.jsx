@@ -73,7 +73,7 @@ const LandingPage = () => {
               description: "Apply fixed amounts or percentage discounts with a click, with real-time total recalculation."
             }
           ].map((feature, index) => (
-            <Card key={index} className="glass-card border-white/10 overflow-hidden relative group animate-scale-in " style={{ animationDelay: `${index * 150}ms` }}>
+            <Card style={{ animation: "float 3s ease-in-out infinite" }} key={index} className="glass-card border-white/10 overflow-hidden relative group animate-scale-in">
               <CardContent className="p-6 relative z-10">
                 <div className="rounded-full w-12 h-12 flex items-center justify-center bg-white/10 mb-4">
                   {feature.icon}

@@ -1,5 +1,6 @@
 import React from 'react'
 import { FileText, CalendarPlus, Settings } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 const Sidebar = () => {
 
@@ -19,13 +20,13 @@ const Sidebar = () => {
             </a>
           </li>
           <li>
-            <a href="#" className='flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 hover:bg-white/5 text-white/80 hover:text-white '>
+            <a href="#" onClick={() =>toast.error('This feature is not available yet!')} className='cursor-not-allowed flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 hover:bg-white/5 text-white/80 hover:text-white '>
               <CalendarPlus />
               <span className='hidden lg:block font-medium ml-3'>Schedule</span>
             </a>
           </li>
           <li>
-            <a href="#" className='flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 hover:bg-white/5 text-white/80 hover:text-white '>
+            <a href="#" onClick={() =>toast.error('This feature is not available yet!')} className='cursor-not-allowed flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 hover:bg-white/5 text-white/80 hover:text-white '>
               <Settings />
               <span className='hidden lg:block font-medium ml-3'>Settings</span>
             </a>
