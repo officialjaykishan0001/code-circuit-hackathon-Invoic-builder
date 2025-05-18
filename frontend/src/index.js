@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage'
 
 const appRouter = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const appRouter = createBrowserRouter([
     path: '/dashboard',
     element: <App />
   },
+  {
+    path: '/login',
+    element: <LoginPage />
+  }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
