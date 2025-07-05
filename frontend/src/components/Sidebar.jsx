@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { FileText, CalendarPlus, Settings } from 'lucide-react'
+import { FileText } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setClickedButton } from '../redux/buttonSlice';
 
@@ -24,35 +23,28 @@ const Sidebar = () => {
               <span className='hidden lg:block font-medium ml-3'>Invoices</span>
             </a>
           </li>
-          <li>
-            <a
-              href="/drafts"
-              onClick={() => dispatch(setClickedButton('drafts'))}
-              className={`cursor-pointer flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 ${clickedButton === 'drafts' ? "text-neon-blue neon-glow" : "hover:bg-white/5 text-white/80 hover:text-white "} `}>
-              <CalendarPlus />
-              <span className='hidden lg:block font-medium ml-3'>Drafts</span>
-            </a>
-          </li>
-          <li>
-            <a href="/settings" onClick={() => dispatch(setClickedButton('settings'))} className={`cursor-pointer flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 ${clickedButton === 'settings' ? "text-neon-blue neon-glow" : "hover:bg-white/5 text-white/80 hover:text-white "} `}>
-              <Settings />
-              <span className='hidden lg:block font-medium ml-3'>Settings</span>
-            </a>
-          </li>
+          
         </ul>
       </nav>
       <div className="p-4 border-t border-white/10">
-        <a href="/profile">
+        <a
+          href="/profile"
+          onClick={() => dispatch(setClickedButton('profile'))}
+          className={`cursor-pointer flex items-center p-3 lg:px-4 lg:py-3 mx-2 rounded-lg transition-all duration-200 ${clickedButton === 'profile' ? "text-neon-blue neon-glow" : "hover:bg-white/5 text-white/80 hover:text-white "} `}
+        >
           <div className="flex items-center">
-            <div className="w-10 h-10 rounded-full bg-blue-600"></div>
-            <div className="hidden lg:block ml-3 ">
-              <p className='text-sm font-medium text-white'>John Doe</p>
-              <p className="text-xs text-white/60">Admin</p>
-            </div>
+            {/* <div className="w-10 h-10 rounded-full bg-blue-600"></div> */}
+            <span className="relative flex shrink-0 overflow-hidden rounded-full w-10 h-10 border-2 border-neon-blue/50">
+              <img class="aspect-square h-full w-full" alt='avatar' src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&amp;h=150&amp;fit=crop&amp;crop=face" />
+            </span>
+          </div>
+          <div className="hidden lg:block ml-3 ">
+            <p className='text-sm font-medium text-white'>John Doe</p>
+            <p className="text-xs text-white/60">Admin</p>
           </div>
         </a>
       </div>
-    </div>
+    </div >
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Building, Mail, Map, Phone } from 'lucide-react'
+import { Building, Camera, Mail, Map, Phone } from 'lucide-react'
 
-const ProfileCard = () => {
+const ProfileCard = ({formDisabled}) => {
   return (
     <>
       <div className="lg:col-span-1">
@@ -11,6 +11,9 @@ const ProfileCard = () => {
             <div className="relatvie mx-auto mb-4">
               <span className="relative flex shrink-0 overflow-hidden rounded-full w-24 h-24 border-2 border-neon-blue/50">
                 <img class="aspect-square h-full w-full" alt='avatar' src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&amp;h=150&amp;fit=crop&amp;crop=face" />
+              </span>
+              <span className={formDisabled ? 'hidden' : ''}>
+                <Camera size={35} className='relative cursor-pointer left-[60px] bottom-[30px] bg-neon-cyan p-2 rounded-full' />
               </span>
             </div>
             <h3 class="font-semibold tracking-tight text-xl text-white">

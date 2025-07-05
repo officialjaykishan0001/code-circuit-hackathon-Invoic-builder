@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardContent, CardFooter, CardHeader } from "../components/ui/Card";
+import { Card, CardContent, CardHeader } from "../components/ui/Card";
 import { EyeOff, Eye, Mail, Lock } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -57,7 +57,7 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
-              <button onClick={handleLogin} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-5 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
+              <button onClick={handleLogin} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
 
               <div className="flex items-center justify-between text-sm">
                 <a href="#" className="text-neon-blue hover:text-neon-blue/80 transition-colors">
@@ -72,14 +72,6 @@ const LoginPage = () => {
 
 
           </CardContent>
-          <CardFooter className="relative px-6 py-4 bg-black/20 border-t border-white/5 flex justify-center">
-            <button
-              onClick={() => navigate('/')}
-              className="text-sm text-white/50 hover:text-white/70 transition-colors"
-            >
-              Back to Home
-            </button>
-          </CardFooter>
         </Card>
       </div>
     </div>

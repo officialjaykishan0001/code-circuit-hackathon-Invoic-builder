@@ -1,8 +1,7 @@
 import { Pencil, Save, User2, XIcon } from 'lucide-react'
 import { useState } from 'react'
 
-const ProfileEditForm = () => {
-    const [formDisabled, setFormDisabled] = useState(true)
+const ProfileEditForm = ({formDisabled, setFormDisabled }) => {
     return (
         <div className="rounded-lg border bg-card text-card-foreground glass-dark border-white/10 shadow-xl overflow-hidden relative">
             <div className="absolute -inset-[1px] rounded-xl bg-gradient-to-r from-neon-blue/30 via-neon-purple/30 to-neon-cyan/30 opacity-30 blur-sm"></div>

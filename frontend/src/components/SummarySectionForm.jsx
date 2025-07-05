@@ -1,8 +1,6 @@
-import React from 'react'
 import { Send } from 'lucide-react'
 import { updateDownload, updateSummaryData } from '../redux/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import toast from 'react-hot-toast'
 
 const SummarySectionForm = () => {
     const dispatch = useDispatch();
@@ -97,13 +95,6 @@ const SummarySectionForm = () => {
 
                         <div className="grid grid-cols-2 gap-3">
                             <button
-                                onClick={() => toast.error('This feature is not available yet!')}
-                                className="cursor-not-allowed w-full h-10 px-4 py-2 text-sm font-medium rounded-md border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
-                            >
-                                Save Draft
-                            </button>
-                            <button
-                                onClick={() => toast.error('This feature is not available yet!')}
                                 className="cursor-not-allowed w-full h-10 px-4 py-2 text-sm font-medium rounded-md border border-white/20 bg-white/5 hover:bg-white/10 transition-colors"
                             >
                                 Send Invoice
