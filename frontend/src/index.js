@@ -9,7 +9,11 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage';
 import { Toaster } from "react-hot-toast";
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import { store, persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import DraftsPage from './pages/DraftsPage';
+import SettingsPage from './pages/SettingsPage';
+import ProfilePage from './pages/ProfilePage';
 
 const appRouter = createBrowserRouter([
   {
@@ -25,16 +29,30 @@ const appRouter = createBrowserRouter([
     element: <LoginPage />
   },
   {
-    path: 'signup',
+    path: '/signup',
     element: <SignupPage />
+  },
+  {
+    path: '/drafts',
+    element: <DraftsPage />
+  },
+  {
+    path: '/settings',
+    element: <SettingsPage />
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={appRouter} />
-      <Toaster />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={appRouter} />
+        <Toaster />
+      </PersistGate>
     </Provider>
   </React.StrictMode>
 );
