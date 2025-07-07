@@ -1,0 +1,38 @@
+# POST http://localhost:8000/api/v1/user/register
+# Content-Type: application/json
+
+# {
+#     "firstname": "test",
+#     "lastname": "3",
+#     "email": "test@3.com",
+#     "password": "test2"
+# }
+
+
+# POST http://localhost:8000/api/v1/user/login
+# Content-Type: application/json
+
+# {
+#     "email": "test@2.com",
+#     "password": "test2"
+# }
+
+# POST http://localhost:8000/api/v1/user/profile/update
+# Content-Type: multipart/form-data; boundary=---011000010111000001101001
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiMWI4ODhiNjA4MzZkYzk1NzExNDYiLCJpYXQiOjE3NTE4NTAzOTEsImV4cCI6MTc1MTkzNjc5MX0._b2yCa-lG_O2wmG_ODGnIqWMO5JEKxm3XCU5-ais-qM
+
+# -----011000010111000001101001
+# Content-Disposition: form-data; name="file"; filename="myphoto.png"
+# Content-Type: image/png
+
+# < ./myphoto.png
+# -----011000010111000001101001
+# Content-Disposition: form-data; name="user"
+# Content-Type: application/json
+
+# { "firstname": "2", "lastname": "test", "phoneNumber": "1234567890", "company": "ACME Foundation", "location": "Los angelus, USA" }
+# -----011000010111000001101001--
+
+
+GET http://localhost:8000/api/v1/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiMWI4ODhiNjA4MzZkYzk1NzExNDYiLCJpYXQiOjE3NTE4NTAzOTEsImV4cCI6MTc1MTkzNjc5MX0._b2yCa-lG_O2wmG_ODGnIqWMO5JEKxm3XCU5-ais-qM
