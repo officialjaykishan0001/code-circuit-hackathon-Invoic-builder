@@ -4,12 +4,14 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage
 import { combineReducers } from 'redux';
 import dataSlice from './dataSlice';
 import buttonSlice from './buttonSlice';
+import authSlice from './authSlice';
 
 
 // Combine reducers (you may have more slices later)
 const rootReducer = combineReducers({
   data: dataSlice,
   button: buttonSlice,
+  auth: authSlice
 });
 
 // Persist config

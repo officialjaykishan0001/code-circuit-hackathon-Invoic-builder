@@ -27,9 +27,11 @@ const userSchema = mongoose.Schema({
     },
     companyName: {
         type: String,
+        default: 'Your Company Name'
     },
     address: {
         type: String,
+        default: "Your Address Line"
     }
 })
 

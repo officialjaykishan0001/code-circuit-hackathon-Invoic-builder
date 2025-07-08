@@ -1,0 +1,1 @@
+export const USER_API_ENDPOINT = "https://invoicex-xl5v.onrender.com/api/v1/user"

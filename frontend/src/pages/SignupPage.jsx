@@ -1,16 +1,65 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader } from "../components/ui/Card";
-import { EyeOff, Eye, Mail, Lock, UserPlus, User } from 'lucide-react'
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import {
+  Eye,
+  EyeOff,
+  Lock,
+  Mail,
+  User,
+  UserPlus,
+} from 'lucide-react';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '../components/ui/Card';
+import { setLoading } from '../redux/authSlice';
+import {USER_API_ENDPOINT} from '../utils/constant'
 
 const SignupPage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSignup = () => {
-        toast.success("Account created successfully")
-        navigate('/login')
+    const [input, setInput] = useState({
+        firstname: "",
+        lastname:"",
+        email: "",
+        password: "",
+    })
+
+    const changeEventHandler = (e) => {
+        setInput({...input, [e.target.name]: e.target.value });
+    }
+
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        dispatch(setLoading(true))
+        try{
+            const res = await axios.post(`${USER_API_ENDPOINT}/register`, input, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
+            })
+
+            if(res.data.success){
+                navigate('/login')
+                toast.success(res.data.message);
+            }
+        }catch(err){
+            console.log(err);
+            toast.error(err.response.data.message)
+        }finally{
+            dispatch(setLoading(false))
+        }
     }
     return (
         <div>
@@ -36,40 +85,25 @@ const SignupPage = () => {
                         </CardHeader>
 
                         <CardContent className="relative space-y-6 pt-6">
-                            <div className="space-y-4">
+                            <form className="space-y-4">
                                 <div className="relative">
                                     <span>Name: </span>
                                     <User className="absolute left-3  top-9 h-4 w-4 text-neon-blue" />
-                                    <input type="name" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="John Doe" />
+                                    <input onChange={changeEventHandler} type="name" name='firstname' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="John Doe" />
                                 </div>
                                 <div className="relative">
                                     <span>Email address: </span>
                                     <Mail className="absolute left-3  top-9 h-4 w-4 text-neon-blue" />
-                                    <input type="email" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="Email address" />
+                                    <input onChange={changeEventHandler} type="email" name='email' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="Email address" />
                                 </div>
                                 <div className="relative">
-                                    <span>Create password: </span>
+                                    <span>Password: </span>
                                     <Lock className="absolute left-3 top-9 h-4 w-4 text-neon-purple" />
-                                    <input type="password" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 pr-10 bg-black/30 border-neon-blue/30 focus:border-neon-purple focus:ring-1 focus:ring-neon-purple/30 transition-all" placeholder="Password" />
+                                    <input onChange={changeEventHandler} type={showPassword ? "" : "password"} name='password' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 pr-10 bg-black/30 border-neon-blue/30 focus:border-neon-purple focus:ring-1 focus:ring-neon-purple/30 transition-all" placeholder="Create password" />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
                                         className="absolute right-3 top-9 text-white/50 hover:text-white"
-                                    >
-                                        {showPassword ? (
-                                            <EyeOff className="h-4 w-4" />
-                                        ) : (
-                                            <Eye className="h-4 w-4" />
-                                        )}
-                                    </button>
-                                </div>
-                                <div className="relative">
-                                    <Lock className="absolute left-3 top-3 h-4 w-4 text-neon-purple" />
-                                    <input type="password" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 pr-10 bg-black/30 border-neon-blue/30 focus:border-neon-purple focus:ring-1 focus:ring-neon-purple/30 transition-all" placeholder="Confirm Password" />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-3 text-white/50 hover:text-white"
                                     >
                                         {showPassword ? (
                                             <EyeOff className="h-4 w-4" />
@@ -99,7 +133,7 @@ const SignupPage = () => {
                                         Log In
                                     </button>
                                 </div>
-                            </div>
+                            </form>
 
                         </CardContent>
                     </Card>

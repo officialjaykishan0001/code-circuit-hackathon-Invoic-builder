@@ -1,16 +1,41 @@
 import React, { useState } from 'react'
 import { Card, CardContent, CardHeader } from "../components/ui/Card";
-import { EyeOff, Eye, Mail, Lock } from 'lucide-react'
+import { EyeOff, Eye, Mail, Lock, Axis3DIcon } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import axios from 'axios';
+import { USER_API_ENDPOINT } from '../utils/constant';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [input, setInput] = useState({
+    email: "",
+    password: ""
+  })
 
-  const handleLogin = () => {
-    toast.success("Logged in successfully.");
-    navigate("/dashboard")
+  const changeEventHandler = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  }
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    console.log(input)
+    try {
+      const res = await axios.post(`${USER_API_ENDPOINT}/login`, input, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true
+      })
+
+      if (res.data.success) {
+        navigate('/dashboard')
+        toast.success(res.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message)
+    }
   }
   return (
     <div className="min-h-screen w-full overflow-hidden relative flex items-center justify-center">
@@ -37,15 +62,16 @@ const LoginPage = () => {
           </CardHeader>
 
           <CardContent className="relative space-y-6 pt-6">
-            <div className="space-y-4">
+            <form className="space-y-4">
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-neon-blue" />
-                <input type="email" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="Email address" />
+                <input onChange={changeEventHandler} type="email" name='email' class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 bg-black/30 border-neon-blue/30 focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30 transition-all" placeholder="Email address" />
               </div>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-4 w-4 text-neon-purple" />
-                <input type="password" class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 pr-10 bg-black/30 border-neon-blue/30 focus:border-neon-purple focus:ring-1 focus:ring-neon-purple/30 transition-all" placeholder="Password" />
+                <input onChange={changeEventHandler} name='password' type={showPassword ? "" : 'password'} class="flex h-10 w-full rounded-md border px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm pl-10 pr-10 bg-black/30 border-neon-blue/30 focus:border-neon-purple focus:ring-1 focus:ring-neon-purple/30 transition-all" placeholder="Password" />
                 <button
+
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-3 text-white/50 hover:text-white"
@@ -57,7 +83,7 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
-              <button onClick={handleLogin} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
+              <button onClick={handleLogin} type='button' class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
 
               <div className="flex items-center justify-between text-sm">
                 <a href="#" className="text-neon-blue hover:text-neon-blue/80 transition-colors">
@@ -68,7 +94,7 @@ const LoginPage = () => {
                   Create Account
                 </a>
               </div>
-            </div>
+            </form>
 
 
           </CardContent>
