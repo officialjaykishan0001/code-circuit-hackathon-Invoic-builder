@@ -5,18 +5,21 @@ import Sidebar from './components/Sidebar'
 import { useSelector } from 'react-redux'
 import ProfileCard from './components/ProfileCard';
 import Layout from './components/layout/Layout';
+import useGetUserProfile from './hooks/useGetUserProfile';
 function App() {
+  //hooks
+  useGetUserProfile();
   const { clickedButton } = useSelector((store) => store.button);
   console.log(clickedButton)
   return (
     <Layout>
-    <div className='flex-1'>
-      <div className="flex min-h-screen max-h-screen bg-[#10131b] text-white">
-        <CreateInvoice />
-        <LivePreview />
+      <div className='flex-1'>
+        <div className="flex min-h-screen max-h-screen bg-[#10131b] text-white">
+          <CreateInvoice />
+          <LivePreview />
+        </div>
       </div>
-    </div>
-</Layout>
+    </Layout>
 
   );
 }

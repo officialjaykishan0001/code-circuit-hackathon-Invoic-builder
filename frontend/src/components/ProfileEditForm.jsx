@@ -29,7 +29,7 @@ const ProfileEditForm = ({ input, setInput, formDisabled, setFormDisabled }) => 
         if (input.file) {
             formData.append("file", input.file)
         }
-
+        console.log(formData)
         try {
             const res   = await axios.post(`${USER_API_ENDPOINT}/profile/update`, formData, {
                 headers: {

@@ -52,7 +52,7 @@ const LivePreview = () => {
             });
         dispatch(updateDownload(!download))
     }
-
+    console.log(user)
     return (
         <div className='w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 hidden lg:block overflow-hidden'>
             <div className="glass-card h-full p-5 overflow-auto animate-slide-in">

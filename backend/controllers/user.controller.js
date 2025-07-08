@@ -130,7 +130,7 @@ exports.logout = async (req, res) => {
 
 exports.updateProfile = async (req, res) => {
   try {
-    const { firstname, lastname, email, phoneNumber, company, location } = req.body;
+    const { firstname, lastname, email, phoneNumber, companyName, address } = req.body;
     const file = req.file;
 
     let cloudResponse;
@@ -155,8 +155,8 @@ exports.updateProfile = async (req, res) => {
     if(lastname) user.lastname = lastname
     if(email) user.email = email
     if(phoneNumber) user.phoneNumber = phoneNumber
-    if(company) user.companyName = company
-    if(location) user.address = location
+    if(companyName) user.companyName = companyName
+    if(address) user.address = address
     if(file) user.profilePicture = cloudResponse?.secure_url;
 
     await user.save();
