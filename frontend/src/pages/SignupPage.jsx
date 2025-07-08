@@ -1,40 +1,41 @@
 import { useState } from 'react';
 import axios from 'axios';
 import {
-  Eye,
-  EyeOff,
-  Lock,
-  Mail,
-  User,
-  UserPlus,
+    Eye,
+    EyeOff,
+    Lock,
+    Mail,
+    User,
+    UserPlus,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  Card,
-  CardContent,
-  CardHeader,
+    Card,
+    CardContent,
+    CardHeader,
 } from '../components/ui/Card';
 import { setLoading } from '../redux/authSlice';
-import {USER_API_ENDPOINT} from '../utils/constant'
+import { USER_API_ENDPOINT } from '../utils/constant'
 
 const SignupPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const loading = useSelector((state) => state.auth.loading);
 
     const [showPassword, setShowPassword] = useState(false);
 
     const [input, setInput] = useState({
         firstname: "",
-        lastname:"",
+        lastname: "",
         email: "",
         password: "",
     })
 
     const changeEventHandler = (e) => {
-        setInput({...input, [e.target.name]: e.target.value });
+        setInput({ ...input, [e.target.name]: e.target.value });
     }
 
 
@@ -42,7 +43,7 @@ const SignupPage = () => {
         e.preventDefault();
 
         dispatch(setLoading(true))
-        try{
+        try {
             const res = await axios.post(`${USER_API_ENDPOINT}/register`, input, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,14 +51,14 @@ const SignupPage = () => {
                 withCredentials: true
             })
 
-            if(res.data.success){
+            if (res.data.success) {
                 navigate('/login')
                 toast.success(res.data.message);
             }
-        }catch(err){
+        } catch (err) {
             console.log(err);
             toast.error(err.response.data.message)
-        }finally{
+        } finally {
             dispatch(setLoading(false))
         }
     }
@@ -123,7 +124,12 @@ const SignupPage = () => {
                                     </label>
                                 </div>
                                 <button onClick={handleSignup} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
-                                    <UserPlus /> Create Account
+                                    {loading ? 'loading...' : (
+                                        <>
+                                            <UserPlus /> Create Account
+                                        </>
+                                    )}
+
                                 </button>
                                 <div class="flex items-center justify-center text-sm">
                                     <span class="text-white/70">

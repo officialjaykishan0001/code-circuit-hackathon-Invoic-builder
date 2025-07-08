@@ -5,9 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { USER_API_ENDPOINT } from '../utils/constant';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading, setUser } from '../redux/authSlice';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch =  useDispatch();
+  const loading = useSelector((state) => state.auth.loading)
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({
     email: "",
@@ -19,7 +23,7 @@ const LoginPage = () => {
   }
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log(input)
+    dispatch(setLoading(true));
     try {
       const res = await axios.post(`${USER_API_ENDPOINT}/login`, input, {
         headers: {
@@ -29,12 +33,16 @@ const LoginPage = () => {
       })
 
       if (res.data.success) {
+        dispatch(setUser(res.data.user));
         navigate('/dashboard')
         toast.success(res.data.message);
+
       }
     } catch (err) {
       console.log(err);
       toast.error(err.response.data.message)
+    }finally{
+      dispatch(setLoading(false));
     }
   }
   return (
@@ -83,7 +91,10 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
-              <button onClick={handleLogin} type='button' class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">Sign In</button>
+              <button onClick={handleLogin} type='button' class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
+              { loading ? 'loading...' : 'Sign In'}
+              
+              </button>
 
               <div className="flex items-center justify-between text-sm">
                 <a href="#" className="text-neon-blue hover:text-neon-blue/80 transition-colors">

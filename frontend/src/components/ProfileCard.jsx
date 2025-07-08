@@ -1,7 +1,15 @@
-import React from 'react'
 import { Building, Camera, Mail, Map, Phone } from 'lucide-react'
+import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
-const ProfileCard = ({formDisabled}) => {
+const ProfileCard = ({input, setInput, formDisabled}) => {
+  const user = useSelector((state) => state.auth.user);
+
+  const fileInputRef = useRef(null)
+
+  const fileChangeHandler = (e) => {
+    setInput({...input, file: e.target.files?.[0]});
+  }
   return (
     <>
       <div className="lg:col-span-1">
@@ -10,33 +18,41 @@ const ProfileCard = ({formDisabled}) => {
           <div className="flex flex-col space-y-1.5 p-6 relative text-center pb-4">
             <div className="relatvie mx-auto mb-4">
               <span className="relative flex shrink-0 overflow-hidden rounded-full w-24 h-24 border-2 border-neon-blue/50">
-                <img class="aspect-square h-full w-full" alt='avatar' src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&amp;h=150&amp;fit=crop&amp;crop=face" />
+                <img class="aspect-square h-full w-full" alt='avatar' src={user?.profilePicture} />
               </span>
               <span className={formDisabled ? 'hidden' : ''}>
-                <Camera size={35} className='relative cursor-pointer left-[60px] bottom-[30px] bg-neon-cyan p-2 rounded-full' />
+                <input 
+                type="file"
+                accept='images/*'
+                ref={fileInputRef} 
+                style={{display: 'none'}}
+                onChange={fileChangeHandler}
+                />
+                
+                <Camera  size={35} onClick={() => fileInputRef.current.click()} className='relative cursor-pointer left-[60px] bottom-[30px] bg-neon-cyan p-2 rounded-full' />
               </span>
             </div>
             <h3 class="font-semibold tracking-tight text-xl text-white">
-              John Doe
+              {`${user?.firstname} ${user?.lastname}`}
             </h3>
           </div>
           <div className="p-6 pt-0 relative space-y-4">
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-white/80">
                 <Mail />
-                john.deo@example.com
+                {user?.email}
               </div>
               <div className="flex items-center gap-3 text-sm text-white/80">
                 <Phone />
-                +91 799 121 4531
+                {user?.phoneNumber}
               </div>
               <div className="flex items-center gap-3 text-sm text-white/80">
                 <Map />
-                Hyderabad, Telengana
+                {user?.address}
               </div>
               <div className="flex items-center gap-3 text-sm text-white/80">
                 <Building />
-                Acme Foundation
+                {user?.companyName}
               </div>
             </div>
           </div>

@@ -11,6 +11,7 @@ const LivePreview = () => {
     const summaryData = useSelector((state) => state.data.summaryData);
     const subtotal = useSelector((state) => state.data.subtotal)
     const download = useSelector((state) => state.data.download);
+    const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const LivePreview = () => {
 
                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save('invoice.pdf');
-                
+
                 toast.success('Invoice exported successfully.')
                 dispatch(resetAllData());
             })
@@ -67,9 +68,9 @@ const LivePreview = () => {
                                 <p className="text-gray-600 mt-1">#{clientData.invoiceNumber}</p>
                             </div>
                             <div className="text-right">
-                                <p className="font-bold text-gray-800">Your Company Name</p>
-                                <p className="text-sm text-gray-600 mt-1">your@email.com</p>
-                                <p className="text-sm text-gray-600 ">Your Address Line</p>
+                                <p className="font-bold text-gray-800">{user?.companyName}</p>
+                                <p className="text-sm text-gray-600 mt-1">{user?.email}</p>
+                                <p className="text-sm text-gray-600 ">{user?.address}</p>
                             </div>
                         </div>
 
