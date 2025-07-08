@@ -11,9 +11,8 @@ import { Toaster } from "react-hot-toast";
 import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import DraftsPage from './pages/DraftsPage';
-import SettingsPage from './pages/SettingsPage';
 import ProfilePage from './pages/ProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const appRouter = createBrowserRouter([
   {
@@ -22,7 +21,11 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <App />
+    element: <ProtectedRoute><App /></ProtectedRoute>
+  },
+  {
+    path: '/profile',
+    element: <ProtectedRoute><ProfilePage /></ProtectedRoute>
   },
   {
     path: '/login',
@@ -31,18 +34,6 @@ const appRouter = createBrowserRouter([
   {
     path: '/signup',
     element: <SignupPage />
-  },
-  {
-    path: '/drafts',
-    element: <DraftsPage />
-  },
-  {
-    path: '/settings',
-    element: <SettingsPage />
-  },
-  {
-    path: '/profile',
-    element: <ProfilePage />
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));

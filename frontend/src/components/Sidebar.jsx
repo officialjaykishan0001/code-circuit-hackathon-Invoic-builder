@@ -5,7 +5,8 @@ import { setClickedButton } from '../redux/buttonSlice';
 const Sidebar = () => {
   const dispatch = useDispatch();
   const { clickedButton } = useSelector((store) => store.button)
-  console.log(clickedButton)
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <div className='h-screen w-20 lg:w-64 flex flex-col glass-dark background'>
       <div className="p-4 flex items-center justify-center lg:justify-start border-b border-white/10">
@@ -35,11 +36,11 @@ const Sidebar = () => {
           <div className="flex items-center">
             {/* <div className="w-10 h-10 rounded-full bg-blue-600"></div> */}
             <span className="relative flex shrink-0 overflow-hidden rounded-full w-10 h-10 border-2 border-neon-blue/50">
-              <img class="aspect-square h-full w-full" alt='avatar' src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=150&amp;h=150&amp;fit=crop&amp;crop=face" />
+              <img class="aspect-square h-full w-full" alt='avatar' src={user?.profilePicture} />
             </span>
           </div>
           <div className="hidden lg:block ml-3 ">
-            <p className='text-sm font-medium text-white'>John Doe</p>
+            <p className='text-sm font-medium text-white'>{`${user?.firstname} ${user?.lastname}`}</p>
             <p className="text-xs text-white/60">Admin</p>
           </div>
         </a>
