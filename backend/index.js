@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 const corOptions = {
-    origin: ["http://localhost:3000", process.env.FRONTEND_URL],
+    origin: ["http://localhost:3000", "https://shiny-potato-qjw64pp75wwfx5qg-3000.app.github.dev", process.env.FRONTEND_URL],
     credentials: true
 }
 app.use(cors(corOptions));

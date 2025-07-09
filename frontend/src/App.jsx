@@ -14,7 +14,7 @@ function App() {
   return (
     <Layout>
       <div className='flex-1'>
-        <div className="flex min-h-screen max-h-screen bg-[#10131b] text-white">
+        <div className="flex flex-col gap-2 lg:gap-0 lg:flex-row min-h-screen max-h-screen bg-[#10131b] text-white">
           <CreateInvoice />
           <LivePreview />
         </div>

@@ -54,7 +54,7 @@ const LivePreview = () => {
     }
     console.log(user)
     return (
-        <div className='w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 hidden lg:block overflow-hidden'>
+        <div className='w-[100vw] md:w-[100%] lg:w-[40%] bg-gradient-to-b from-secondary to-background border border-white/10  p-6 lg:overflow-hidden overflow-y-scroll'>
             <div className="glass-card h-full p-5 overflow-auto animate-slide-in">
                 <div className="flex items-center mb-6">
                     <div className="h-5 w-1 bg-neon-blue rounded-full mr-2"></div>
