@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, CardContent, CardHeader } from "../components/ui/Card";
-import { EyeOff, Eye, Mail, Lock, Axis3DIcon } from 'lucide-react'
+import { EyeOff, Eye, Mail, Lock, Axis3DIcon, Loader } from 'lucide-react'
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -92,7 +92,12 @@ const LoginPage = () => {
                 </button>
               </div>
               <button onClick={handleLogin} type='button' class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
-              { loading ? 'loading...' : 'Sign In'}
+              { loading ? (
+                <>
+                  <Loader className='animate-spin'/>
+                  Please wait...
+                </>
+              ) : 'Sign In'}
               
               </button>
 

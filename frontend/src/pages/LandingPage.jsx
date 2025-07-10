@@ -56,7 +56,7 @@ const LandingPage = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 w-full max-w-5xl mx-auto">
             {[
               {
                 icon: <CalculatorIcon className="h-8 w-8 text-neon-blue" />,

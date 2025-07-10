@@ -31,7 +31,18 @@ const LivePreview = () => {
     if (download) {
         const input = invoiceRef.current;
 
-        html2canvas(input, { scale: 2 })
+        const clone = input.cloneNode(true);
+
+        clone.style.position = "absolute";
+        clone.style.top = '-999px';
+        clone.style.left = '0';
+        clone.style.width = input.scrollWidth + 'px';
+        clone.style.height = input.scrollHeight + 'px';
+        clone.style.overflow = 'visible';
+        clone.style.zIndex = '-999';
+        document.body.appendChild(clone);
+
+        html2canvas(clone, { scale: 2 })
             .then((canvas) => {
                 const imgData = canvas.toDataURL('image/png');
                 const pdf = new jsPDF('p', 'mm', 'a4');

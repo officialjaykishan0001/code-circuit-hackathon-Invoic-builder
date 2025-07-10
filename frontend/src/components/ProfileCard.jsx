@@ -1,5 +1,6 @@
 import { Building, Camera, Mail, Map, Phone } from 'lucide-react'
 import { useRef } from 'react';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
 const ProfileCard = ({input, setInput, formDisabled}) => {
@@ -9,6 +10,7 @@ const ProfileCard = ({input, setInput, formDisabled}) => {
 
   const fileChangeHandler = (e) => {
     setInput({...input, file: e.target.files?.[0]});
+    toast.success('Profile picture selected.')
   }
   return (
     <>

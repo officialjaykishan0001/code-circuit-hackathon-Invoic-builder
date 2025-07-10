@@ -1,4 +1,4 @@
-import { Pencil, Save, User2, XIcon } from 'lucide-react'
+import { Loader, Pencil, Save, User2, XIcon } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import toast from 'react-hot-toast';
 import { setLoading, setUser } from '../redux/authSlice';
@@ -68,7 +68,7 @@ const ProfileEditForm = ({ input, setInput, formDisabled, setFormDisabled }) => 
                         </span>
                     ) : (
                         <span className='flex  text-white items-center text-sm'>
-                            <XIcon />
+                            <XIcon size={18} />
                             Cancel
                         </span>
                     )}
@@ -108,7 +108,7 @@ const ProfileEditForm = ({ input, setInput, formDisabled, setFormDisabled }) => 
                             onClick={handleSave}
                             className='inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300'
                         >
-                            {loading ? 'loading..' : (
+                            {loading ? <Loader className='animate-spin'/> : (
                                 <>
                                     <Save />
                                     Save

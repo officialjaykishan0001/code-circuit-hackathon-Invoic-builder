@@ -1,4 +1,4 @@
-import { Send } from 'lucide-react'
+import { Loader, Send } from 'lucide-react'
 import { updateDownload, updateSummaryData } from '../redux/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -89,8 +89,14 @@ const SummarySectionForm = () => {
                             onClick={() => dispatch(updateDownload(!download))}
                             className="w-full flex items-center justify-center gap-2 h-10 px-4 py-6 text-sm font-medium text-white bg-neon-blue rounded-md hover:bg-neon-blue/80 transition-all animate-float"
                         >
-                            <Send />
-                            Export PDF
+
+                            {download ? (
+                                <Loader className='animate-spin' />
+                            ) : (<>
+                                <Send />
+                                Export PDF
+                            </>
+                            )}
                         </button>
 
                         <div className="grid grid-cols-2 gap-3">

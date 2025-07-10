@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
     Eye,
     EyeOff,
+    Loader,
     Lock,
     Mail,
     User,
@@ -124,7 +125,12 @@ const SignupPage = () => {
                                     </label>
                                 </div>
                                 <button onClick={handleSignup} class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 px-4 w-full py-3 h-auto bg-gradient-to-r from-neon-blue to-neon-purple hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300">
-                                    {loading ? 'loading...' : (
+                                    {loading ? (
+                                        <>
+                                            <Loader className='animate-spin' />
+                                            Please wait...
+                                        </>
+                                    ) : (
                                         <>
                                             <UserPlus /> Create Account
                                         </>
